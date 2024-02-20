@@ -1,6 +1,6 @@
 const baseURL = "https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com";
 
-const container = document.querySelector(".container");
+const planetsContainer = document.querySelector("#planets-container");
 
 fetchData();
 
