@@ -1,0 +1,58 @@
+// Base URL
+const baseURL = "https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com";
+
+// Make a POST request with baseURL to get key
+// return key
+async function getKey(url) {
+  try {
+    let response = await fetch(url, {
+      method: "POST",
+    });
+
+    if (response.ok) {
+      let data = await response.json();
+      return data.key;
+    } else {
+      console.error("Error:", response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+
+// Make a GET request with baseURL and key from getKey(url) function
+// return data
+async function getData(url, key) {
+  try {
+    let response = await fetch(url, {
+      method: "GET",
+      headers: { "x-zocom": `${key}` },
+    });
+
+    if (response.ok) {
+      let data = await response.json();
+      return data;
+    } else {
+      console.error("Error:", response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+
+// Fetch data after getting the key
+// Export only fetchData()
+export async function fetchData() {
+  try {
+    const key = await getKey(baseURL + "/keys");
+    const data = await getData(baseURL + "/bodies", key);
+    if (data.bodies) {
+      const bodies = data.bodies.map((body) => {
+        return body;
+      });
+      return bodies;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}

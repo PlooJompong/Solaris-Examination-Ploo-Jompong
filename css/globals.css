@@ -21,19 +21,22 @@
   --fw-400: 400;
 }
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  padding: 0 30px;
   max-width: 1440px;
   height: 100vh;
   background: var(--clr-background);
 }
 
-.container {
+#main-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,7 +44,7 @@ body {
   color: var(--clr-white);
 }
 
-.header-container {
+#header-container {
   padding: 10px 0;
 }
 
@@ -57,7 +60,7 @@ form {
 }
 
 #search-input,
-button {
+#search-btn {
   padding: 5px 10px;
   border-radius: 5px;
   border: 1px solid black;
@@ -73,14 +76,13 @@ button {
   justify-content: center;
   align-items: flex-end;
   width: 100%;
-  padding: 0 50px;
-  gap: 16px;
+  row-gap: 16px;
 }
 
 .title h1 {
   font-family: var(--ff-secular-one);
   font-size: 3.75rem;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.5rem;
 }
 
 .title p {
@@ -88,6 +90,4 @@ button {
   font-size: 1.5rem;
   letter-spacing: 1rem;
   color: var(--clr-sun);
-  letter-spacing: 0.09em;
-  line-height: 60px;
 }
