@@ -91,3 +91,10 @@ form {
   letter-spacing: 1rem;
   color: var(--clr-sun);
 }
+
+#planets-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

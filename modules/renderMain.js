@@ -16,9 +16,9 @@ export async function renderMain() {
     ${bodies
       .map(
         (body) => `
-        <div>
-          <p>${body.type}</p>
+        <div id=${body.name.toLowerCase()} class="planet">
           <p>${body.name}</p>
+          <p>${body.type}</p>
           <p>${body.latinName}</p>
           <p>${body.circumference}</p>
           <p>${body.temp.day}</p>
@@ -30,5 +30,5 @@ export async function renderMain() {
       )
       .join("")} 
   </section >
-    `;
+  `;
 }
