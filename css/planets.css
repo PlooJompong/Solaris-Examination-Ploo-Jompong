@@ -1,0 +1,117 @@
+.big:hover {
+  transform: scale(1.05);
+}
+
+.medium:hover {
+  transform: scale(1.2);
+}
+
+.small:hover {
+  transform: scale(1.5);
+}
+
+#solen {
+  position: absolute;
+  top: -350px;
+  left: -750px;
+  width: 900px;
+  height: 900px;
+  background-color: var(--clr-sun);
+}
+
+#solen:hover {
+  box-shadow: 0 0 6px 2px var(--clr-sun);
+}
+
+#merkurius,
+#mars {
+  width: 14px;
+  height: 14px;
+  margin-left: 200px;
+  background-color: var(--clr-mercury);
+}
+
+#merkurius:hover {
+  box-shadow: 0 0 6px 2px var(--clr-mercury);
+}
+
+#venus {
+  width: 26px;
+  height: 26px;
+  background-color: var(--clr-venus);
+}
+
+#venus:hover {
+  box-shadow: 0 0 6px 2px var(--clr-venus);
+}
+
+#jorden {
+  width: 28px;
+  height: 28px;
+  background-color: var(--clr-earth);
+}
+
+#jorden:hover {
+  box-shadow: 0 0 6px 2px var(--clr-earth);
+}
+
+#mars {
+  margin-inline: auto;
+  background-color: var(--clr-mars);
+}
+
+#mars:hover {
+  box-shadow: 0 0 6px 2px var(--clr-mars);
+}
+
+#jupiter {
+  width: 188px;
+  height: 188px;
+  background-color: var(--clr-jupiter);
+}
+
+#jupiter:hover {
+  box-shadow: 0 0 6px 2px var(--clr-jupiter);
+}
+
+#saturnus {
+  position: relative;
+  width: 144px;
+  height: 144px;
+  background-color: var(--clr-saturn);
+}
+
+#saturnus-line {
+  position: absolute;
+  top: 70px;
+  left: -40px;
+  width: 220px;
+  height: 5px;
+  transform: rotate(-30deg);
+  border-radius: 50%;
+  background-color: var(--clr-white);
+  opacity: 0.4;
+}
+
+#saturnus:hover {
+  box-shadow: 0 0 6px 2px var(--clr-saturn);
+}
+
+#uranus,
+#neptunus {
+  width: 66px;
+  height: 66px;
+  background-color: var(--clr-uranus);
+}
+
+#uranus:hover {
+  box-shadow: 0 0 6px 2px var(--clr-uranus);
+}
+
+#neptunus {
+  background-color: var(--clr-neptune);
+}
+
+#neptunus:hover {
+  box-shadow: 0 0 6px 2px var(--clr-neptune);
+}

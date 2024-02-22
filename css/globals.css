@@ -1,16 +1,14 @@
 :root {
   --clr-white: #fff;
   --clr-sun: #ffd029;
-  --clr-sun-shadow: 0px 0px 250px 0px hsla(47, 100%, 58%, 0.2);
-  --clr-1: #888;
-  --clr-2: #e7cdcd;
-  --clr-3: #428ed4;
-  --clr-4: #ef5f5f;
-  --clr-5: #e29468;
-  --clr-6: #c7aa72;
-  --clr-7: #c9d4f1;
-  --clr-8: #7a91a7;
-  --clr-9: #e29468;
+  --clr-mercury: #888;
+  --clr-venus: #e7cdcd;
+  --clr-earth: #428ed4;
+  --clr-mars: #ef5f5f;
+  --clr-jupiter: #e29468;
+  --clr-saturn: #c7aa72;
+  --clr-uranus: #c9d4f1;
+  --clr-neptune: #7a91a7;
   --clr-background: linear-gradient(90deg, #0c164d 0%, #190b22 100%);
 
   --ff-lora: "Lora", serif;
@@ -30,22 +28,23 @@
 }
 
 body {
-  padding: 0 30px;
   max-width: 1440px;
-  height: 100vh;
+  margin-inline: auto;
   background: var(--clr-background);
 }
 
 #main-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  height: 100vh;
   color: var(--clr-white);
+  overflow: hidden;
 }
 
 #header-container {
-  padding: 10px 0;
+  padding: 0 20px;
 }
 
 form {
@@ -53,21 +52,30 @@ form {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 40%;
-  margin-inline: auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  width: 50%;
+  margin: 30px auto;
 }
 
 #search-input,
 #search-btn {
+  font-family: var(--ff-secular-one);
   padding: 5px 10px;
   border-radius: 5px;
-  border: 1px solid black;
+  letter-spacing: 2px;
+  border: none;
 }
 
 #search-input {
   width: 50%;
+}
+
+#search-input:focus {
+  outline-color: #0c164d;
+}
+
+#search-btn:hover {
+  color: var(--clr-mars);
+  cursor: pointer;
 }
 
 .title {
@@ -76,13 +84,16 @@ form {
   justify-content: center;
   align-items: flex-end;
   width: 100%;
+  padding: 0 20px;
   row-gap: 16px;
+  margin-bottom: 140px;
 }
 
 .title h1 {
   font-family: var(--ff-secular-one);
   font-size: 3.75rem;
   letter-spacing: 0.5rem;
+  text-shadow: 1px 1px 8px var(--clr-white);
 }
 
 .title p {
@@ -90,11 +101,40 @@ form {
   font-size: 1.5rem;
   letter-spacing: 1rem;
   color: var(--clr-sun);
+  font-weight: var(--fw-300);
+  text-shadow: 3px 3px 8px var(--clr-sun);
 }
 
 #planets-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.planet {
+  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 20px;
+  justify-items: center;
+  border-radius: 50%;
+  margin-inline: auto;
+  transition: 0.3s;
+}
+
+.planet span {
+  position: absolute;
+  top: -30px;
+  font-family: var(--ff-secular-one);
+  /* font-family: var(--ff-roboto-condensed); */
+  transform: scale(1);
+}
+
+.planet:hover .hidden {
+  display: block;
+}
+
+.planet .hidden {
+  display: none;
 }
