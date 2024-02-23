@@ -40,17 +40,21 @@ async function getData(url, key) {
   }
 }
 
-// Fetch data after getting the key
-// Export only fetchData()
+/* Fetch data after getting the key
+ * Export only fetchData()
+ */
 export async function fetchData() {
   try {
-    const key = await getKey(baseURL + "/keys");
-    const data = await getData(baseURL + "/bodies", key);
-    if (data.bodies) {
-      const bodies = data.bodies.map((body) => {
-        return body;
-      });
-      return bodies;
+    if (localStorage.getItem("bodies")) {
+      return JSON.parse(localStorage.getItem("bodies"));
+    } else {
+      const key = await getKey(baseURL + "/keys");
+      const data = await getData(baseURL + "/bodies", key);
+      if (data.bodies) {
+        localStorage.setItem("bodies", JSON.stringify(data.bodies));
+        const bodies = JSON.parse(localStorage.getItem("bodies"));
+        return bodies;
+      }
     }
   } catch (error) {
     console.error("Error:", error);

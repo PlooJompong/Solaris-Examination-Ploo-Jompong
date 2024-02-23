@@ -19,7 +19,7 @@ export async function renderMain() {
     `;
 }
 
-/* Render planet from api
+/* Render planet from local storage/api
  * if body.name === "Saturnus" add line to planet
  */
 function renderPlanet(body) {
