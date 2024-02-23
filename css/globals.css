@@ -112,29 +112,3 @@ form {
   align-items: center;
   width: 100%;
 }
-
-.planet {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  border-radius: 50%;
-  margin-inline: auto;
-  transition: 0.3s;
-}
-
-.planet span {
-  position: absolute;
-  top: -30px;
-  font-family: var(--ff-secular-one);
-  /* font-family: var(--ff-roboto-condensed); */
-  transform: scale(1);
-}
-
-.planet:hover .hidden {
-  display: block;
-}
-
-.planet .hidden {
-  display: none;
-}
