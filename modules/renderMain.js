@@ -13,13 +13,15 @@ export async function renderMain() {
       <p>SOLARIS</p>
     </section>
 
-  <section id="planets-container">
-    ${bodies.map((body) => renderPlanet(body)).join("")}
-  </section >
-    `;
+    <section id="planets-container">
+      ${bodies.map((body) => renderPlanet(body)).join("")}
+    </section>
+  `;
+
+  renderInfo();
 }
 
-/* Render planet from local storage/api
+/* Get planet from local storage/api
  * if body.name === "Saturnus" add line to planet
  */
 function renderPlanet(body) {
@@ -46,27 +48,53 @@ function renderPlanet(body) {
   return div.outerHTML;
 }
 
-{
-  /* <p>${body.name}</p> */
+/* Get bodies from local storage and
+ * check if planet.id matches with body.name then
+ * render info for that planet
+ */
+function renderInfo() {
+  const planets = document.querySelectorAll(".planet");
+  const bodies = JSON.parse(localStorage.getItem("bodies"));
+
+  planets.forEach((planet) => {
+    planet.addEventListener("click", () => {
+      const planetName = planet.id;
+
+      const clickedBody = bodies.find(
+        (body) => body.name.toLowerCase() === planetName,
+      );
+      if (clickedBody) {
+        main.innerHTML = generateInfoHTML(clickedBody);
+      } else {
+        console.log("Body not found for planet:", planetName);
+      }
+    });
+  });
 }
-{
-  /* <p>${body.type}</p> */
-}
-{
-  /* <p>${body.latinName}</p> */
-}
-{
-  /* <p>${body.circumference}</p> */
-}
-{
-  /* <p>${body.temp.day}</p> */
-}
-{
-  /* <p>${body.temp.night}</p> */
-}
-{
-  /* <p>${body.desc}</p> */
-}
-{
-  /* <br> */
+
+/* Generate HTML to display seleted planet */
+function generateInfoHTML(body) {
+  return `
+    <div id="info-container">
+      <h1 class="header">${body.name.toUpperCase()}</h1>
+      <p class="latin-name">${body.latinName}</p>
+      <p class="description">${body.desc}</p>
+      <div class="line"></div>
+      <div class="info-parent">
+        <div class="info-1">
+          <p>OMKRETS</p>
+          <p class="info-font gap-tb">${body.circumference} km</p>
+          <p>DAY TEMPERATUR</p>
+          <p class="info-font gap-tb">${body.temp.day} C</p>
+        </div>
+        <div class="info-2">
+          <p>KM FRÅN SOLEN</p>
+          <p class="info-font gap-tb">${body.distance}</p>
+          <p>NIGHT TEMPERATUR</p>
+          <p class="info-font gap-tb">${body.temp.night} C</p>
+        </div>
+      </div>
+      <div class="line"></div>
+    </div>
+  `;
 }

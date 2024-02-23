@@ -112,3 +112,66 @@ form {
   align-items: center;
   width: 100%;
 }
+
+/* Display Info */
+#info-container {
+  width: 640px;
+  height: 680px;
+}
+
+.header {
+  font-size: 3.75rem;
+  font-family: var(--ff-secular-one);
+  letter-spacing: 0.5rem;
+  line-height: 60px;
+  margin: 20px 0;
+}
+
+.latin-name {
+  font-family: var(--ff-lora);
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: var(--fw-300);
+  letter-spacing: 0.5rem;
+  color: var(--clr-sun);
+  margin-bottom: 25px;
+}
+
+.description {
+  font-family: var(--ff-roboto-condensed);
+  font-size: 1.125rem;
+  font-weight: var(--fw-300);
+  line-height: 24px;
+  color: var(--clr-white);
+  margin-bottom: 25px;
+}
+
+.line {
+  border: 1px solid #ffffff33;
+  margin-bottom: 30px;
+}
+
+.info-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-1,
+.info-2 {
+  font-family: var(--ff-secular-one);
+  font-size: 1.125rem;
+  line-height: 18px;
+  letter-spacing: 0.05rem;
+  margin-right: auto;
+}
+
+.gap-tb {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.info-font {
+  font-family: var(--ff-roboto-condensed);
+  font-weight: var(--fw-300);
+}
