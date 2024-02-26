@@ -3,7 +3,7 @@ const baseURL = "https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com";
 
 // Make a POST request with baseURL to get key
 // return key
-async function getKey(url) {
+async function getApiKey(url) {
   try {
     let response = await fetch(url, {
       method: "POST",
@@ -20,9 +20,10 @@ async function getKey(url) {
   }
 }
 
-// Make a GET request with baseURL and key from getKey(url) function
-// return data
-async function getData(url, key) {
+/* Make a GET request with baseURL and key from getApiKey
+ * return data
+ */
+async function getBodiesData(url, key) {
   try {
     let response = await fetch(url, {
       method: "GET",
@@ -48,8 +49,8 @@ export async function fetchData() {
     if (localStorage.getItem("bodies")) {
       return JSON.parse(localStorage.getItem("bodies"));
     } else {
-      const key = await getKey(baseURL + "/keys");
-      const data = await getData(baseURL + "/bodies", key);
+      const key = await getApiKey(baseURL + "/keys");
+      const data = await getBodiesData(baseURL + "/bodies", key);
       if (data.bodies) {
         localStorage.setItem("bodies", JSON.stringify(data.bodies));
         const bodies = JSON.parse(localStorage.getItem("bodies"));

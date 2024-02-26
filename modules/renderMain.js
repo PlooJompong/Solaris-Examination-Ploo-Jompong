@@ -3,11 +3,20 @@ import { fetchData } from "./api.js";
 
 const main = document.querySelector("#main-container");
 
-// Export renderMain to index.js
+/* Export renderMain to index.js
+ * Check if selected planet data exists in local storage
+ * render info if it does else render every planet
+ */
 export async function renderMain() {
   const bodies = await fetchData();
+  const selectedPlanetData = localStorage.getItem("selectedPlanet");
 
-  main.innerHTML = `
+  if (selectedPlanetData) {
+    const selectedPlanet = JSON.parse(selectedPlanetData);
+    main.innerHTML = generateInfoHTML(selectedPlanet);
+    localStorage.removeItem("selectedPlanet");
+  } else {
+    main.innerHTML = `
     <section class="title">
       <h1>SOLSYSTEMET</h1>
       <p>SOLARIS</p>
@@ -17,12 +26,13 @@ export async function renderMain() {
       ${bodies.map((body) => renderPlanet(body)).join("")}
     </section>
   `;
-
+  }
   renderInfo();
 }
 
 /* Get planet from local storage/api
  * if body.name === "Saturnus" add line to planet
+ * add class depending on planet's name
  */
 function renderPlanet(body) {
   const div = document.createElement("div");
@@ -48,27 +58,27 @@ function renderPlanet(body) {
   return div.outerHTML;
 }
 
-/* Get bodies from local storage and
- * check if planet.id matches with body.name then
- * render info for that planet
+/* Check if clicked element has .planet class
+ * save clicked planet id and check if it matches with body.name
+ * render html for the clicked planet
  */
 function renderInfo() {
-  const planets = document.querySelectorAll(".planet");
-  const bodies = JSON.parse(localStorage.getItem("bodies"));
+  main.addEventListener("click", (event) => {
+    if (event.target.classList.contains("planet")) {
+      const clickedPlanet = event.target;
+      const planetName = clickedPlanet.id;
 
-  planets.forEach((planet) => {
-    planet.addEventListener("click", () => {
-      const planetName = planet.id;
-
-      const clickedBody = bodies.find(
+      const clickedBody = JSON.parse(localStorage.getItem("bodies")).find(
         (body) => body.name.toLowerCase() === planetName,
       );
+
       if (clickedBody) {
         main.innerHTML = generateInfoHTML(clickedBody);
+        localStorage.setItem("selectedPlanet", JSON.stringify(clickedBody));
       } else {
         console.log("Body not found for planet:", planetName);
       }
-    });
+    }
   });
 }
 
