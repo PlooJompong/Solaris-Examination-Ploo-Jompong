@@ -5,7 +5,7 @@ const main = document.querySelector("#main-container");
 
 /* Export renderMain to index.js
  * Check if selected planet data exists in local storage
- * render info if it does else render every planet
+ * render planet's info if it does or else render every planet
  */
 export async function renderMain() {
   const bodies = await fetchData();
@@ -14,7 +14,7 @@ export async function renderMain() {
   if (selectedPlanetData) {
     const selectedPlanet = JSON.parse(selectedPlanetData);
     main.innerHTML = generateInfoHTML(selectedPlanet);
-    localStorage.removeItem("selectedPlanet");
+    attachCloseBtn();
   } else {
     main.innerHTML = `
     <section class="title">
@@ -26,13 +26,13 @@ export async function renderMain() {
       ${bodies.map((body) => renderPlanet(body)).join("")}
     </section>
   `;
+    renderInfo();
   }
-  renderInfo();
 }
 
 /* Get planet from local storage/api
  * if body.name === "Saturnus" add line to planet
- * add class depending on planet's name
+ * add classes depending on planet's name
  */
 function renderPlanet(body) {
   const div = document.createElement("div");
@@ -59,7 +59,7 @@ function renderPlanet(body) {
 }
 
 /* Check if clicked element has .planet class
- * save clicked planet id and check if it matches with body.name
+ * save clicked planet.id as clickedPlanet and check if it matches with body.name
  * render html for the clicked planet
  */
 function renderInfo() {
@@ -75,6 +75,7 @@ function renderInfo() {
       if (clickedBody) {
         main.innerHTML = generateInfoHTML(clickedBody);
         localStorage.setItem("selectedPlanet", JSON.stringify(clickedBody));
+        attachCloseBtn();
       } else {
         console.log("Body not found for planet:", planetName);
       }
@@ -82,11 +83,43 @@ function renderInfo() {
   });
 }
 
-/* Generate HTML to display seleted planet */
+/* Attach close button after the info is rendered */
+function attachCloseBtn() {
+  const closeBtn = document.querySelector("#close-btn");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeInfo);
+  } else {
+    console.warn("No close button found");
+  }
+}
+
+/* remove selected planet from local storage and render main */
+function closeInfo() {
+  localStorage.removeItem("selectedPlanet");
+  renderMain();
+}
+
+/* Generate info html
+ * if the selected planet is Solen change to km to jorden
+ */
 function generateInfoHTML(body) {
+  const bodiesArray = JSON.parse(localStorage.getItem("bodies"));
+  const parseString = bodiesArray[3]?.distance || "";
+  const distanceText =
+    body.name === "Solen"
+      ? `<p>KM FRÅN JORDEN</p>
+       <p class="info-font gap-tb">${parseString}</p>`
+      : `<p>KM FRÅN SOLEN</p>
+       <p class="info-font gap-tb">${body.distance}</p>`;
+
   return `
     <div id="info-container">
-      <h1 class="header">${body.name.toUpperCase()}</h1>
+      <div class="header-close">
+        <h1 class="header">${body.name.toUpperCase()}</h1>
+        <div id="close-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+      </div>
       <p class="latin-name">${body.latinName}</p>
       <p class="description">${body.desc}</p>
       <div class="line"></div>
@@ -98,8 +131,7 @@ function generateInfoHTML(body) {
           <p class="info-font gap-tb">${body.temp.day} C</p>
         </div>
         <div class="info-2">
-          <p>KM FRÅN SOLEN</p>
-          <p class="info-font gap-tb">${body.distance}</p>
+          ${distanceText} 
           <p>NIGHT TEMPERATUR</p>
           <p class="info-font gap-tb">${body.temp.night} C</p>
         </div>

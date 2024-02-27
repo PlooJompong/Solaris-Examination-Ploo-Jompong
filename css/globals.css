@@ -74,7 +74,7 @@ form {
 }
 
 #search-btn:hover {
-  color: var(--clr-mars);
+  color: var(--clr-mercury);
   cursor: pointer;
 }
 
@@ -119,12 +119,37 @@ form {
   height: 680px;
 }
 
+.header-close {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .header {
   font-size: 3.75rem;
   font-family: var(--ff-secular-one);
   letter-spacing: 0.5rem;
   line-height: 60px;
   margin: 20px 0;
+}
+
+#close-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+#close-btn:hover {
+  cursor: pointer;
+  color: #190b22;
+  background-color: var(--clr-white);
+}
+
+i {
+  font-size: 1.5rem;
 }
 
 .latin-name {
