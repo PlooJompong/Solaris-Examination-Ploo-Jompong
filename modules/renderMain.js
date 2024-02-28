@@ -15,6 +15,8 @@ export async function renderMain() {
     const selectedPlanet = JSON.parse(selectedPlanetData);
     main.innerHTML = generateInfoHTML(selectedPlanet);
     attachCloseBtn();
+    localStorage.removeItem("selectedPlanet");
+    searchPlanet();
   } else {
     main.innerHTML = `
     <section class="title">
@@ -27,6 +29,43 @@ export async function renderMain() {
     </section>
   `;
     renderInfo();
+    searchPlanet();
+  }
+}
+
+/* get bodies from local storage */
+function getBodiesFromLocalStorage() {
+  const bodies = JSON.parse(localStorage.getItem("bodies"));
+  return bodies;
+}
+
+/* Check if inputField.value existing in any body.name
+ * if found run generateInfoHTML(foundBody)
+ */
+function searchPlanet() {
+  const inputField = document.querySelector("#search-input");
+  const searchBtn = document.querySelector("#search-btn");
+
+  if (inputField) {
+    searchBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (inputField.value) {
+        const foundBody = getBodiesFromLocalStorage().find(
+          (body) =>
+            body.name.toLowerCase() === inputField.value.trim().toLowerCase(),
+        );
+        if (foundBody) {
+          main.innerHTML = generateInfoHTML(foundBody);
+          localStorage.setItem("selectedPlanet", JSON.stringify(foundBody));
+          attachCloseBtn();
+        } else {
+          console.warn("Body not found for planet:", inputField.value);
+        }
+      }
+      inputField.value = "";
+    });
+  } else {
+    console.warn("No input ");
   }
 }
 
@@ -66,9 +105,9 @@ function renderInfo() {
   main.addEventListener("click", (event) => {
     if (event.target.classList.contains("planet")) {
       const clickedPlanet = event.target;
-      const planetName = clickedPlanet.id;
+      const planetName = clickedPlanet.id.toLowerCase();
 
-      const clickedBody = JSON.parse(localStorage.getItem("bodies")).find(
+      const clickedBody = getBodiesFromLocalStorage().find(
         (body) => body.name.toLowerCase() === planetName,
       );
 
@@ -93,17 +132,17 @@ function attachCloseBtn() {
   }
 }
 
-/* remove selected planet from local storage and render main */
+/* remove selected planet from local storage and run renderMain() */
 function closeInfo() {
   localStorage.removeItem("selectedPlanet");
   renderMain();
 }
 
-/* Generate info html
- * if the selected planet is Solen change to km to jorden
+/* Render html to display selected planet info
+ * if the selected planet is solen change distance to km to jorden
  */
 function generateInfoHTML(body) {
-  const bodiesArray = JSON.parse(localStorage.getItem("bodies"));
+  const bodiesArray = getBodiesFromLocalStorage();
   const parseString = bodiesArray[3]?.distance || "";
   const distanceText =
     body.name === "Solen"

@@ -1,6 +1,7 @@
 // Export renderHeader to index.js
+const header = document.querySelector("#header-container");
+
 export function renderHeader() {
-  const header = document.querySelector("#header-container");
   header.innerHTML = `
     <form>
       <input type="text" id="search-input" placeholder="Search Planet" list="planets"/>
