@@ -33,7 +33,7 @@ export async function renderMain() {
   }
 }
 
-/* get bodies from local storage */
+// Get bodies from local storage
 function getBodiesFromLocalStorage() {
   const bodies = JSON.parse(localStorage.getItem("bodies"));
   return bodies;
@@ -59,7 +59,7 @@ function searchPlanet() {
           localStorage.setItem("selectedPlanet", JSON.stringify(foundBody));
           attachCloseBtn();
         } else {
-          console.warn("Body not found for planet:", inputField.value);
+          return (main.innerHTML = `<h3>Can't find "${inputField.value}"</h3>`);
         }
       }
       inputField.value = "";
@@ -122,7 +122,7 @@ function renderInfo() {
   });
 }
 
-/* Attach close button after the info is rendered */
+// Attach close button after the info is rendered //
 function attachCloseBtn() {
   const closeBtn = document.querySelector("#close-btn");
   if (closeBtn) {
@@ -132,7 +132,7 @@ function attachCloseBtn() {
   }
 }
 
-/* remove selected planet from local storage and run renderMain() */
+// Remove selected planet from local storage and run renderMain()
 function closeInfo() {
   localStorage.removeItem("selectedPlanet");
   renderMain();

@@ -30,8 +30,35 @@
 body {
   max-width: 1440px;
   margin-inline: auto;
-  background: var(--clr-background);
+  background: radial-gradient(#1b2735 0%, #090a0f 100%);
+  /* background: var(--clr-background); */
 }
+
+/* body::after { */
+/*   content: ""; */
+/*   position: absolute; */
+/*   top: 0; */
+/*   left: 0; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   background: radial-gradient(circle at 20% 20%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 25% 25%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 20% 30%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 25% 15%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 35% 40%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 40% 20%, white 0.1%, transparent 0.2%), */
+/*     radial-gradient(circle at 40% 80%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 50% 50%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 65% 60%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 70% 45%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 75% 55%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 80% 10%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 80% 70%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 85% 80%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 90% 20%, white 0.1%, transparent 0.1%), */
+/*     radial-gradient(circle at 95% 90%, white 0.1%, transparent 0.1%); */
+/*   z-index: -1000; */
+/* } */
 
 i {
   font-size: 1.5rem;
@@ -43,7 +70,7 @@ i {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: 825px;
+  height: 100vh;
   color: var(--clr-white);
   overflow: hidden;
 }
@@ -188,7 +215,6 @@ form {
   align-items: center;
 }
 
-.info,
 .info {
   font-family: var(--ff-secular-one);
   font-size: 1.125rem;
