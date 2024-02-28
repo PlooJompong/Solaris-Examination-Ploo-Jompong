@@ -9,7 +9,7 @@
   --clr-saturn: #c7aa72;
   --clr-uranus: #c9d4f1;
   --clr-neptune: #7a91a7;
-  --clr-background: linear-gradient(90deg, #0c164d 0%, #190b22 100%);
+  --clr-background: linear-gradient(-90deg, #0c164d 0%, #190b22 100%);
 
   --ff-lora: "Lora", serif;
   --ff-secular-one: "Secular One", sans-serif;
@@ -33,12 +33,17 @@ body {
   background: var(--clr-background);
 }
 
+i {
+  font-size: 1.5rem;
+}
+
 #main-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  min-height: 825px;
   color: var(--clr-white);
   overflow: hidden;
 }
@@ -93,7 +98,7 @@ form {
   font-family: var(--ff-secular-one);
   font-size: 3.75rem;
   letter-spacing: 0.5rem;
-  text-shadow: 1px 1px 8px var(--clr-white);
+  text-shadow: 1px 1px 6px var(--clr-white);
 }
 
 .title p {
@@ -102,7 +107,7 @@ form {
   letter-spacing: 1rem;
   color: var(--clr-sun);
   font-weight: var(--fw-300);
-  text-shadow: 3px 3px 8px var(--clr-sun);
+  text-shadow: 1px 1px 6px var(--clr-sun);
 }
 
 #planets-container {
@@ -123,6 +128,10 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.header-close h1 {
+  text-shadow: 1px 1px 6px var(--clr-white);
 }
 
 .header {
@@ -148,10 +157,6 @@ form {
   background-color: var(--clr-white);
 }
 
-i {
-  font-size: 1.5rem;
-}
-
 .latin-name {
   font-family: var(--ff-lora);
   font-size: 24px;
@@ -160,6 +165,7 @@ i {
   letter-spacing: 0.5rem;
   color: var(--clr-sun);
   margin-bottom: 25px;
+  text-shadow: 1px 1px 6px var(--clr-sun);
 }
 
 .description {
@@ -182,8 +188,8 @@ i {
   align-items: center;
 }
 
-.info-1,
-.info-2 {
+.info,
+.info {
   font-family: var(--ff-secular-one);
   font-size: 1.125rem;
   line-height: 18px;

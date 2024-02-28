@@ -149,10 +149,14 @@ function generateInfoHTML(body) {
       ? `<p>KM FRÅN JORDEN</p>
        <p class="info-font gap-tb">${parseString}</p>`
       : `<p>KM FRÅN SOLEN</p>
-       <p class="info-font gap-tb">${body.distance}</p>`;
+       <p class="info-font gap-tb">${body.distance.toLocaleString()}</p>`;
+
+  const saturnusLine =
+    body.name === "Saturnus" ? `<div class="saturnus-line"></div>` : "";
 
   return `
-    <div id="info-container">
+    <div class="show-planet" id="${body.name.toLowerCase()}-select">${saturnusLine}</div>
+    <section id="info-container">
       <div class="header-close">
         <h1 class="header">${body.name.toUpperCase()}</h1>
         <div id="close-btn">
@@ -163,19 +167,23 @@ function generateInfoHTML(body) {
       <p class="description">${body.desc}</p>
       <div class="line"></div>
       <div class="info-parent">
-        <div class="info-1">
+        <div class="info">
           <p>OMKRETS</p>
-          <p class="info-font gap-tb">${body.circumference} km</p>
+          <p class="info-font gap-tb">${body.circumference.toLocaleString()} km</p >
           <p>DAY TEMPERATUR</p>
           <p class="info-font gap-tb">${body.temp.day} C</p>
-        </div>
-        <div class="info-2">
-          ${distanceText} 
+        </div >
+        <div class="info">
+          ${distanceText}
           <p>NIGHT TEMPERATUR</p>
           <p class="info-font gap-tb">${body.temp.night} C</p>
         </div>
       </div>
       <div class="line"></div>
-    </div>
+      <div class="info">
+        <p>TYPE</p>
+        <p class="info-font gap-tb">${body.type.toUpperCase()}</p>
+      </div>
+    </section >
   `;
 }
