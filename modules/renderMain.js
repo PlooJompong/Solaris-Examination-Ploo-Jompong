@@ -1,10 +1,11 @@
 // Import only fetchData from api.js
 import { fetchData } from "./api.js";
+import { searchFail, searchSuccess } from "./searchMsg.js";
 
 const main = document.querySelector("#main-container");
 
 /* Export renderMain to index.js
- * Check if selected planet data exists in local storage
+ * Check if selected planet data exists in loal storage
  * render planet's info if it does or else render every planet
  */
 export async function renderMain() {
@@ -45,28 +46,28 @@ function getBodiesFromLocalStorage() {
 function searchPlanet() {
   const inputField = document.querySelector("#search-input");
   const searchBtn = document.querySelector("#search-btn");
+  const searchMsg = document.querySelector("#search-msg");
 
-  if (inputField) {
-    searchBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      if (inputField.value) {
-        const foundBody = getBodiesFromLocalStorage().find(
-          (body) =>
-            body.name.toLowerCase() === inputField.value.trim().toLowerCase(),
-        );
-        if (foundBody) {
-          main.innerHTML = generateInfoHTML(foundBody);
-          localStorage.setItem("selectedPlanet", JSON.stringify(foundBody));
-          attachCloseBtn();
-        } else {
-          return (main.innerHTML = `<h3>Can't find "${inputField.value}"</h3>`);
-        }
+  searchBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (inputField.value !== "") {
+      const foundBody = getBodiesFromLocalStorage().find(
+        (body) =>
+          body.name.toLowerCase() === inputField.value.trim().toLowerCase(),
+      );
+      if (foundBody) {
+        searchSuccess();
+        main.innerHTML = generateInfoHTML(foundBody);
+        localStorage.setItem("selectedPlanet", JSON.stringify(foundBody));
+        attachCloseBtn();
+      } else {
+        searchFail();
       }
-      inputField.value = "";
-    });
-  } else {
-    console.warn("No input ");
-  }
+    } else {
+      searchMsg.classList.remove("hide");
+      searchMsg.textContent = "The input is empty!";
+    }
+  });
 }
 
 /* Get planet from local storage/api
@@ -102,6 +103,7 @@ function renderPlanet(body) {
  * render html for the clicked planet
  */
 function renderInfo() {
+  const inputField = document.querySelector("#search-input");
   main.addEventListener("click", (event) => {
     if (event.target.classList.contains("planet")) {
       const clickedPlanet = event.target;
@@ -115,6 +117,8 @@ function renderInfo() {
         main.innerHTML = generateInfoHTML(clickedBody);
         localStorage.setItem("selectedPlanet", JSON.stringify(clickedBody));
         attachCloseBtn();
+        searchSuccess();
+        inputField.value = "";
       } else {
         console.log("Body not found for planet:", planetName);
       }
@@ -134,8 +138,11 @@ function attachCloseBtn() {
 
 // Remove selected planet from local storage and run renderMain()
 function closeInfo() {
+  const inputField = document.querySelector("#search-input");
   localStorage.removeItem("selectedPlanet");
   renderMain();
+  searchSuccess();
+  inputField.value = "";
 }
 
 /* Render html to display selected planet info
@@ -147,7 +154,7 @@ function generateInfoHTML(body) {
   const distanceText =
     body.name === "Solen"
       ? `<p>KM FRÅN JORDEN</p>
-       <p class="info-font gap-tb">${parseString}</p>`
+       <p class="info-font gap-tb">${parseString.toLocaleString()}</p>`
       : `<p>KM FRÅN SOLEN</p>
        <p class="info-font gap-tb">${body.distance.toLocaleString()}</p>`;
 

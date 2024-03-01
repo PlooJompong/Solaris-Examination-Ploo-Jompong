@@ -4,7 +4,7 @@ const header = document.querySelector("#header-container");
 export function renderHeader() {
   header.innerHTML = `
     <form>
-      <input type="text" id="search-input" placeholder="Search Planet" list="planets"/>
+      <input type="text" id="search-input" placeholder="Search Planet" list="planets" maxlength="15"/>
         <datalist id="planets">
           <option value="Solen">
           <option value="Merkurius">
@@ -18,5 +18,6 @@ export function renderHeader() {
         </datalist>
       <button type="submit" id="search-btn">Search</button>
     </form>
+    <p id="search-msg" class="hide"></p>
     `;
 }

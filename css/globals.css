@@ -58,7 +58,7 @@ form {
   align-items: center;
   gap: 10px;
   width: 50%;
-  margin: 30px auto;
+  margin: 30px auto 15px;
 }
 
 #search-input,
@@ -197,11 +197,21 @@ form {
 }
 
 .gap-tb {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin: 10px 0 30px;
 }
 
 .info-font {
   font-family: var(--ff-roboto-condensed);
   font-weight: var(--fw-300);
+}
+
+#search-msg {
+  text-align: center;
+  color: var(--clr-white);
+  font-family: var(--ff-secular-one);
+  margin-bottom: 10px;
+}
+
+.hide {
+  display: none;
 }
