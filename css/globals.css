@@ -14,6 +14,7 @@
   --ff-lora: "Lora", serif;
   --ff-secular-one: "Secular One", sans-serif;
   --ff-roboto-condensed: "Roboto Condensed", sans-serif;
+  --ff-varela-round: "Varela Round", sans-serif;
 
   --fw-300: 300;
   --fw-400: 400;
@@ -31,10 +32,6 @@ body {
   max-width: 1440px;
   margin-inline: auto;
   background: var(--clr-background);
-}
-
-i {
-  font-size: 1.5rem;
 }
 
 #main-container {
@@ -81,6 +78,13 @@ form {
 #search-btn:hover {
   color: var(--clr-mercury);
   cursor: pointer;
+}
+
+#search-msg {
+  text-align: center;
+  color: var(--clr-white);
+  font-family: var(--ff-secular-one);
+  margin-bottom: 10px;
 }
 
 .title {
@@ -157,6 +161,11 @@ form {
   background-color: var(--clr-white);
 }
 
+#close-btn>span {
+  font-size: 1.5rem;
+  font-family: var(--ff-varela-round);
+}
+
 .latin-name {
   font-family: var(--ff-lora);
   font-size: 24px;
@@ -203,13 +212,6 @@ form {
 .info-font {
   font-family: var(--ff-roboto-condensed);
   font-weight: var(--fw-300);
-}
-
-#search-msg {
-  text-align: center;
-  color: var(--clr-white);
-  font-family: var(--ff-secular-one);
-  margin-bottom: 10px;
 }
 
 .hide {

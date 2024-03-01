@@ -167,7 +167,7 @@ function generateInfoHTML(body) {
       <div class="header-close">
         <h1 class="header">${body.name.toUpperCase()}</h1>
         <div id="close-btn">
-          <i class="fa-solid fa-xmark"></i>
+          <span>X</span>
         </div>
       </div>
       <p class="latin-name">${body.latinName}</p>
