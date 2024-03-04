@@ -1,8 +1,9 @@
 // Base URL
 const baseURL = "https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com";
 
-// Make a POST request with baseURL to get key
-// return key
+/* Make a POST request with baseURL to get key
+ * return key
+ */
 async function getApiKey(url) {
   try {
     let response = await fetch(url, {
@@ -41,8 +42,9 @@ async function getBodiesData(url, key) {
   }
 }
 
-/* Fetch data after getting the key
- * Export only fetchData()
+/* Export fetchData() to renderMain.js
+ * Fetch data after getting the key
+ * Fetch only if localStorage is empty
  */
 export async function fetchData() {
   try {

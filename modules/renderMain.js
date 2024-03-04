@@ -1,11 +1,13 @@
-// Import only fetchData from api.js
+/* Import fetchData() from api.js
+ * Import searchFail(), searchSuccess() from searchMsg.js
+ */
 import { fetchData } from "./api.js";
 import { searchFail, searchSuccess } from "./searchMsg.js";
 
 const main = document.querySelector("#main-container");
 
 /* Export renderMain to index.js
- * Check if selected planet data exists in loal storage
+ * Check if selected planet data exists in local storage
  * render planet's info if it does or else render every planet
  */
 export async function renderMain() {
@@ -40,8 +42,10 @@ function getBodiesFromLocalStorage() {
   return bodies;
 }
 
-/* Check if inputField.value existing in any body.name
+/* Check if inputField.value is existing in any body.name
  * if found run generateInfoHTML(foundBody)
+ * and storage the generated planet to local storage
+ * also run attachCloseBtn
  */
 function searchPlanet() {
   const inputField = document.querySelector("#search-input");
@@ -126,7 +130,7 @@ function renderInfo() {
   });
 }
 
-// Attach close button after the info is rendered //
+// Attach close button after the info is rendered
 function attachCloseBtn() {
   const closeBtn = document.querySelector("#close-btn");
   if (closeBtn) {
@@ -146,7 +150,7 @@ function closeInfo() {
 }
 
 /* Render html to display selected planet info
- * if the selected planet is solen change distance to km to jorden
+ * if the selected planet is solen change distance to km från jorden
  */
 function generateInfoHTML(body) {
   const bodiesArray = getBodiesFromLocalStorage();
